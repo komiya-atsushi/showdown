@@ -806,7 +806,17 @@ var _DoHeaders = function(text) {
 		});
 
 	function headerId(m) {
-		return m.replace(/[^\w]/g, '').toLowerCase();
+		m = m.replace(/\s/g, "_");
+		var result = "";
+		for (var i = 0; i < m.length; i++) {
+			var ch = m.charAt(i);
+			if (ch.match(/\w/)) {
+				result += ch;
+			} else {
+				result += "." + m.charCodeAt(i).toString(16);
+			}
+		}
+		return result;
 	}
 	return text;
 }
